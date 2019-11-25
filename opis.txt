@@ -1,0 +1,26 @@
+
+up2 init
+	- server generates subdomain (sqlite)
+	- server creates vhost
+	- client saves subdomain, email and token in file .XXXXX
+
+up2 deploy
+	- client zips directory
+	- client sends zip file to server
+	- server unzip file and put it in subdomain directory
+	- server reload WWW
+
+up2 delete
+	- server remove subdomain directory and vhost
+	- server reload WWW
+
+
+
+
+server:
+	- docker
+	- nginx (SSL LE), uwsgi
+	- python, flask, sqlite
+
+client:
+	- python, requests

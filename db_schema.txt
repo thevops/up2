@@ -1,0 +1,8 @@
+
+
+Table: Domain
+Columns:
+- id
+- name
+- token
+
