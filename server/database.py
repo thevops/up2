@@ -1,10 +1,7 @@
 import peewee
 
-from flask import jsonify
-
 
 db = peewee.SqliteDatabase('db.sqlite3')
-
 
 
 class BaseModel(peewee.Model):
@@ -12,7 +9,7 @@ class BaseModel(peewee.Model):
         database = db
 
 
-class User(BaseModel):
+class Domain(BaseModel):
     name = peewee.CharField(unique=True)
     token = peewee.CharField(unique=True)
 
@@ -27,4 +24,8 @@ class User(BaseModel):
 
 
 
-
+if __name__ == '__main__':
+    # this fragment executes when run explicit: python database.py
+    print("Database creating...")
+    Domain.create_table()
+    print("Done")

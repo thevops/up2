@@ -1,7 +1,7 @@
 
 import secrets
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from database import db, Domain
 
 
@@ -13,17 +13,22 @@ db.connect()
 
 @app.route('/init', methods=['POST'])
 def init():
+    # prepare response
+    response_data = {}
     # get data from form
     try:
         new_domain = request.form['domain']
     except:
-        return "", 400 # Bad Request
+        response_data = {"status": "Client error"}
+        return jsonify(response_data), 400 # Bad Request
 
     # check if domain exists
-    domain = Domain.select().where(Domain.name == new_domain).get()
-    if domain:
-        return "Domain exists", 400
-    else:
+    try:
+        domain = Domain.select().where(Domain.name == new_domain).get()
+        response_data = {"status": "Domain exists"}
+        return jsonify(response_data), 400
+    except:
+        # domain not exists, so you can use it
         # generate token
         token = secrets.token_hex(16)
 
@@ -34,10 +39,12 @@ def init():
                 d.save()
             except:
                 db.rollback()
-                return "Server error", 500
+                response_data = {"status": "Server error"}
+                return jsonify(response_data), 500
 
         # success - return token to user
-        return token, 200
+        response_data = {"status":"Success", "token": token}
+        return jsonify(response_data), 200
 
 
 
