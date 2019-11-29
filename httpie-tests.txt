@@ -3,3 +3,14 @@
 # init
 
 http --form POST http://127.0.0.1:5000/init domain=costam
+
+
+
+# deploy
+
+http --form POST http://127.0.0.1:5000/deploy token=11086cad8bc9819cfb2c419cec7a3dac domain=costam file@timer_debata.zip
+
+
+# delete 
+
+http --form POST http://127.0.0.1:5000/delete token=398d2d1d04ee0e16186482d7ceddc418 domain=miecio
