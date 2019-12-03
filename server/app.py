@@ -17,7 +17,6 @@ DOMAINS_DIRECTORY = 'domains/'
 ################################    FLASK, DB connection    ################################
 
 app = Flask(__name__)
-app.config['UPLOAD_DIRECTORY'] = UPLOAD_DIRECTORY
 
 db.connect()
 
@@ -99,7 +98,7 @@ def deploy():
 
     # save file
     if file.filename != '':
-        file.save(os.path.join(app.config['UPLOAD_DIRECTORY'], file.filename))
+        file.save(os.path.join(UPLOAD_DIRECTORY, file.filename))
 
 
     domain_dir = DOMAINS_DIRECTORY + "/" + domain + "/"
@@ -144,13 +143,20 @@ def delete():
 
 
     # delete directory
+    domain_dir = DOMAINS_DIRECTORY + "/" + domain + "/"
+    # create domain directory
+    try:
+        shutil.rmtree(domain_dir)
+    except:
+        response_data = {"status": "Removing domain directory error"}
+        return jsonify(response_data), 500
     # delete nginx vhost
 
     # delete Domain object in database
     try:
         domain_obj.delete_instance()
     except:
-        response_data = {"status": "Server error"}
+        response_data = {"status": "Removing domain in database error"}
         return jsonify(response_data), 500
 
     # return successful response
