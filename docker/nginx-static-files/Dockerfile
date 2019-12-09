@@ -16,7 +16,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 
 CMD [ "uwsgi", "--socket", "/var/run/flask.sock", \
-               "--uid", "uwsgi", \
+               "--uid", "root", \
                "--plugins", "python3", \
                "--protocol", "uwsgi", \
                "--wsgi", "app:app" ]

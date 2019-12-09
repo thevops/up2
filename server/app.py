@@ -164,6 +164,18 @@ def delete():
     return jsonify(response_data), 200
 
 
+@app.route('/check', methods=['GET'])
+def check():
+    # get all domains
+    try:
+        domains = Domain.select()
+    except:
+        return "Checking error"
+
+    return domains
+
+
+
 
 if __name__ == '__main__':
     app.run('127.0.0.1', debug=True) # start aplikacji, polaczenie do lokalnego hosta, wlaczenie pokazywania bledow

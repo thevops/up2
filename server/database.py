@@ -1,9 +1,6 @@
 import peewee
 
 
-db = peewee.SqliteDatabase('db.sqlite3')
-
-
 class BaseModel(peewee.Model):
     class Meta:
         database = db
@@ -22,6 +19,15 @@ class Domain(BaseModel):
         }
         return data
 
+
+
+### START ###
+
+if os.path.isfile('db.sqlite3'):
+    db = peewee.SqliteDatabase('db.sqlite3')
+else:
+    db = peewee.SqliteDatabase('db.sqlite3')
+    Domain.create_table()
 
 
 if __name__ == '__main__':
