@@ -27,7 +27,16 @@ class Domain(BaseModel):
 if __name__ == '__main__':
     # this fragment executes when run explicit: python database.py
     print("Database checking...")
-    query = Domain.select()
+    db.connect()
+    try:
+        query = Domain.select()
+    except Exception as e:
+        print("Error", e)
+        print("Database empty... creating tables")
+        Domain.create_table()
+        print("Done")
+        exit()
+
     if not query.exists():
         print("Database empty... creating tables")
         Domain.create_table()
