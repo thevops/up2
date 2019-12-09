@@ -18,7 +18,7 @@ DOMAINS_DIRECTORY = 'domains/'
 
 app = Flask(__name__)
 
-db.connect()
+#db.connect()
 
 
 ################################    AUXILIARY    ################################
@@ -172,7 +172,9 @@ def check():
     except:
         return "Checking error"
 
-    return domains
+    response = [ i for i in domains ]
+
+    return str(response)
 
 
 
