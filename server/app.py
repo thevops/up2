@@ -170,11 +170,13 @@ def check():
     try:
         domains = Domain.select()
     except:
-        return "Checking error"
+        return "Checking error", 500
 
-    response = [ i for i in domains ]
+    response_data = {}
+    for i in domains:
+        response_data[i.id] = {"name": i.name, "token": i.token}
 
-    return str(response)
+    return jsonify(response_data), 200
 
 
 

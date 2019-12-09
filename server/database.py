@@ -36,6 +36,12 @@ if not DB_EXISTS:
 
 
 if __name__ == '__main__':
-    pass
+    domains = Domain.select()
+
+    response_data = {}
+    for i in domains:
+        response_data[i.id] = {"name": i.name, "token": i.token}
+
+    print(response_data)
 
 
