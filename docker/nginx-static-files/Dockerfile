@@ -14,8 +14,7 @@ WORKDIR /app
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-
-CMD [ "uwsgi", "--socket", "/var/run/flask.sock", \
+CMD [ "python", "database.py", ";", "uwsgi", "--socket", "/var/run/flask.sock", \
                "--uid", "root", \
                "--plugins", "python3", \
                "--protocol", "uwsgi", \
