@@ -1,4 +1,10 @@
 import peewee
+import os
+
+DB_EXISTS = False
+
+if os.path.isfile('db.sqlite3'):
+    DB_EXISTS = True
 
 
 db = peewee.SqliteDatabase('db.sqlite3')
@@ -23,30 +29,13 @@ class Domain(BaseModel):
         return data
 
 
+if not DB_EXISTS:
+    print("Database empty... creating tables")
+    Domain.create_table()
+
+
 
 if __name__ == '__main__':
-    # this fragment executes when run explicit: python database.py
-    print("Database checking...")
-    db.connect()
-    try:
-        query = Domain.select()
-        if not query.exists():
-            print("Database empty... creating tables")
-            Domain.create_table()
-            print("Done")
-    except Exception as e:
-        print("Error", e)
-        print("Database empty... creating tables")
-        Domain.create_table()
-        print("Done")
-
-    print("Checking again...")
-    try:
-        query = Domain.select()
-        if query.exists():
-            print(query)
-    except Exception as e:
-        print("Error", e)
-        exit(1)
+    pass
 
 

@@ -15,7 +15,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 EXPOSE 5050
 
-CMD [ "python3", "database.py", ";", "uwsgi", "--socket", "0.0.0.0:5050", \
+CMD [ "uwsgi", "--socket", "0.0.0.0:5050", \
                "--uid", "root", \
                "--plugins", "python3", \
                "--protocol", "uwsgi", \
