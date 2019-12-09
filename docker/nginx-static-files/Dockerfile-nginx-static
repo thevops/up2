@@ -1,0 +1,5 @@
+FROM nginx:alpine
+
+RUN mkdir /domains/
+
+COPY subdomains.conf /etc/nginx/conf.d/
