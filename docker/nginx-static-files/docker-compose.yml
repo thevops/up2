@@ -9,7 +9,7 @@ services:
     volumes:
       - ./domains:/domains
     ports:
-      - "9090:80"
+      - "5050:5050"
 
   nginx-static:
     build:
@@ -18,4 +18,4 @@ services:
     volumes:
       - ./domains:/domains
     ports:
-      - "5050:5050"
+      - "5051:80"
