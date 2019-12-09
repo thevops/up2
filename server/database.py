@@ -39,7 +39,6 @@ if __name__ == '__main__':
         print("Database empty... creating tables")
         Domain.create_table()
         print("Done")
-        exit()
 
     print("Checking again...")
     try:
