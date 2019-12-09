@@ -30,6 +30,10 @@ if __name__ == '__main__':
     db.connect()
     try:
         query = Domain.select()
+        if not query.exists():
+            print("Database empty... creating tables")
+            Domain.create_table()
+            print("Done")
     except Exception as e:
         print("Error", e)
         print("Database empty... creating tables")
@@ -37,7 +41,13 @@ if __name__ == '__main__':
         print("Done")
         exit()
 
-    if not query.exists():
-        print("Database empty... creating tables")
-        Domain.create_table()
-    print("Done")
+    print("Checking again...")
+    try:
+        query = Domain.select()
+        if query.exists():
+            print(query)
+    except Exception as e:
+        print("Error", e)
+        exit(1)
+
+
