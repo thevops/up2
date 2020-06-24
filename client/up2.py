@@ -82,7 +82,9 @@ def zip_current_directory(domain):
                     zip_obj.write(filepath)
     return str(domain + '.zip')
 
+
 ################################    MAIN functions    ################################
+
 
 def init():
     # check if config file exists
